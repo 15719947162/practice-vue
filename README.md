@@ -1,29 +1,6 @@
-# practice-vue
+项目启动 yarn serve
 
-## Project setup
-```
-yarn install
-```
+项目搭建（vue + ts）
+先全局安装vue-cli和typescript（npm i -g @vue/cli typescript）
+创建vue项目（vue create 项目名称）选择ts创建
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
