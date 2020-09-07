@@ -1,8 +1,18 @@
 <template>
-  <div>
-    <el-menu @open="handleOpen" @close="handleClose">
+  <div style="height:100%">
+    <div style="text-align:center;height:60px;display:flex;justify-content: center;align-items: center;">
+      <div>
+        <img src="../assets/logo.png" alt="" style="height:60px;widht60px">
+      </div>
+      <div style="margin:0 10px;font-size:24px;font-weight:blod;">
+        王元口力口
+      </div>
+    </div>
+    <div style="height:calc(100% - 60px)">
+      <el-menu @open="handleOpen" @close="handleClose" style="height:100%">
       <MenuMain :data="menuData"></MenuMain>
     </el-menu>
+    </div>
   </div>
 </template>
 
