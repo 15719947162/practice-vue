@@ -8,7 +8,7 @@ import store from "./store";
 Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
-Vue.prototype.$ELEMENT = { size: "small", zIndex: 3000 };
+Vue.prototype.$ELEMENT = { size: "small"};
 
 new Vue({
   router,

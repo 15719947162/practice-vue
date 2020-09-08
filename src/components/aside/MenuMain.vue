@@ -8,7 +8,7 @@
       >
         <template slot="title">
           <i class="el-icon-location"></i>
-          <span>{{ item.name }}</span>
+          <span slot="title">{{ item.name }}</span>
         </template>
         <MenuMain :data="item.children"></MenuMain>
       </el-submenu>
@@ -30,4 +30,17 @@ export default class MenuMain extends Vue {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+.el-menu--collapse .el-submenu__title{
+ span{
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    visibility: hidden;
+    display: inline-block;
+  }
+   .el-submenu__icon-arrow{
+    display:none;
+  }
+}
+</style>

@@ -1,18 +1,16 @@
 <template>
   <div style="height:100%">
-    <div style="text-align:center;height:60px;display:flex;justify-content: center;align-items: center;">
+      <el-menu @select="handleSelect" :collapse="menuCollapse" style="height:100%">
+        <div style="text-align:center;height:60px;display:flex;justify-content: center;align-items: center;">
       <div>
         <img src="../assets/logo.png" alt="" style="height:60px;widht60px">
       </div>
-      <div style="margin:0 10px;font-size:24px;font-weight:blod;">
-        王元口力口
+      <div v-show="!menuCollapse" style="margin:0 10px;font-size:24px;font-weight:blod;">
+        <span>王元口力口</span>
       </div>
     </div>
-    <div style="height:calc(100% - 60px)">
-      <el-menu @open="handleOpen" @close="handleClose" style="height:100%">
-      <MenuMain :data="menuData"></MenuMain>
+      <MenuMain :data="menuTreeData"></MenuMain>
     </el-menu>
-    </div>
   </div>
 </template>
 
@@ -20,10 +18,10 @@
 import { Component, Vue } from "vue-property-decorator";
 import MenuMain from "./aside/MenuMain.vue";
 
-interface MenuItem {
-  id: string;
-  name: string;
-  children: Array<MenuItem | null>;
+interface Item {
+  id:string,
+  name:string,
+  children:Array<Item | null>
 }
 
 @Component({
@@ -31,65 +29,27 @@ interface MenuItem {
     MenuMain
   }
 })
-export default class Aside extends Vue {
-  //组件的data
-  menuData: Array<MenuItem> = [
-    {
-      id: "1",
-      name: "节点1",
-      children: [
-        {
-          id: "11",
-          name: "节点11",
-          children: []
-        },
-        {
-          id: "12",
-          name: "节点12",
-          children: []
-        }
-      ]
-    },
-    {
-      id: "2",
-      name: "节点2",
-      children: [
-        {
-          id: "21",
-          name: "节点21",
-          children: []
-        },
-        {
-          id: "22",
-          name: "节点22",
-          children: []
-        }
-      ]
-    },
-    {
-      id: "3",
-      name: "节点3",
-      children: [
-        {
-          id: "31",
-          name: "节点31",
-          children: []
-        },
-        {
-          id: "32",
-          name: "节点32",
-          children: []
-        }
-      ]
-    }
-  ];
 
-  public handleOpen(key: string, keyPath: string): void {
-    console.log(key, keyPath);
+export default class Aside extends Vue {
+
+  get menuTreeData(){
+    return this.$store.state.menuTreeData
   }
 
-  public handleClose(key: string, keyPath: string): void {
-    console.log(key, keyPath);
+  get menuArrData(){
+    return this.$store.state.menuArrData
+  }
+
+  get menuCollapse(){
+    return this.$store.state.menuCollapse
+  }
+
+  handleSelect(key: string, keyPath: string): void {
+    this.findNodeInArrData(key);
+  }
+
+  findNodeInArrData(key:string){
+    this.$store.dispatch('setSelectNode',this.menuArrData.filter((item:Item) => item.id == key))
   }
 }
 </script>
