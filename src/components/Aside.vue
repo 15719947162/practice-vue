@@ -49,7 +49,7 @@ export default class Aside extends Vue {
   }
 
   findNodeInArrData(key:string){
-    this.$store.dispatch('setSelectNode',this.menuArrData.filter((item:Item) => item.id == key))
+    this.$store.dispatch('setSelectNode',this.menuArrData.filter((item:Item) => item.id == key)[0])
   }
 }
 </script>

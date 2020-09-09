@@ -19,7 +19,15 @@ export default new Vuex.Store({
         {
           id: "12",
           name: "节点12",
-          children: []
+          children: [{
+            id: "121",
+          name: "节点121",
+          children:[]
+          },{
+            id: "122",
+          name: "节点122",
+          children:[]
+          }]
         }
       ]
     },{
@@ -31,7 +39,25 @@ export default new Vuex.Store({
       id: "12",
       name: "节点12",
       path:["节点1","节点12"],
-      children: []
+      children: [{
+        id: "121",
+      name: "节点121",
+      children:[]
+      },{
+        id: "122",
+      name: "节点122", 
+      children:[]
+      }]
+    },{
+      id: "121",
+    name: "节点121",
+    path:["节点1","节点12","节点121"],
+    children:[]
+    },{
+      id: "122",
+    name: "节点122",
+    path:["节点1","节点12","节点122"],
+    children:[]
     },{
       id: "2",
       name: "节点2",
@@ -98,7 +124,15 @@ export default new Vuex.Store({
           {
             id: "12",
             name: "节点12",
-            children: []
+            children: [{
+              id: "121",
+            name: "节点121",
+            children:[]
+            },{
+              id: "122",
+            name: "节点122",
+            children:[]
+            }]
           }
         ]
       },
@@ -136,7 +170,6 @@ export default new Vuex.Store({
       }
     ],
     selectNode:{},
-    searchNode:{},
   },
   mutations: {
     SETSELECTNODE:function(state,data){
@@ -145,9 +178,6 @@ export default new Vuex.Store({
     CHANGEMENUCOLLAPSE:function(state,data){
       state.menuCollapse = data;
     },
-    SETSEARCHNODE:function(state,data){
-      state.searchNode = data;
-    }
   },
   actions: {
     setSelectNode:function(context,data){
@@ -156,10 +186,6 @@ export default new Vuex.Store({
     changeMenuCollapse:function(context,data){
       context.commit('CHANGEMENUCOLLAPSE',data);
     },
-    setSearchNode:function(context,data){
-      debugger
-      context.commit('SETSEARCHNODE',data);
-    }
   },
   modules: {}
 });

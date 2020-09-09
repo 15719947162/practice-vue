@@ -6,11 +6,13 @@
         @click="changeMenuCollapse"
         style="margin-right:10px"
       ></i>
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>首页</el-breadcrumb-item>
-        <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+      <el-breadcrumb>
+        <template v-if="!selectNode.path">
+          <el-breadcrumb-item>首页</el-breadcrumb-item>
+        </template>
+        <template v-else>
+          <el-breadcrumb-item v-for="(item,index) in selectNode.path" :key="index">{{item}}</el-breadcrumb-item>
+        </template>
       </el-breadcrumb>
     </div>
     <div style="height:100%;text-align: right;display:flex;align-items:center">
@@ -47,6 +49,10 @@ interface Item {
 export default class HelloWorld extends Vue {
   searchValue: any = ""
 
+  get selectNode(){
+    return this.$store.state.selectNode 
+  }
+
   get menuArrData(){
     return this.$store.state.menuArrData
   }
@@ -56,7 +62,7 @@ export default class HelloWorld extends Vue {
   }
 
   findSearchNode(newVal:string,oldVal:string): void{
-    this.$store.dispatch("setSearchNode", this.menuArrData.find((item:Item) => item.name.indexOf(newVal) >= 0));
+    this.$store.dispatch("setSelectNode", this.menuArrData.find((item:Item) => item.name.indexOf(newVal) >= 0) || {});
   }
 
   changeMenuCollapse(): void {
