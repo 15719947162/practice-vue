@@ -144,6 +144,9 @@ export default new Vuex.Store({
     },
     CHANGEMENUCOLLAPSE:function(state,data){
       state.menuCollapse = data;
+    },
+    SETSEARCHNODE:function(state,data){
+      state.searchNode = data;
     }
   },
   actions: {
@@ -152,6 +155,10 @@ export default new Vuex.Store({
     },
     changeMenuCollapse:function(context,data){
       context.commit('CHANGEMENUCOLLAPSE',data);
+    },
+    setSearchNode:function(context,data){
+      debugger
+      context.commit('SETSEARCHNODE',data);
     }
   },
   modules: {}
