@@ -8,7 +8,7 @@
         <el-header height="60px">
           <Header></Header>
         </el-header>
-        <el-main>
+        <el-main style="padding:0">
           <Main></Main>
         </el-main>
       </el-container>

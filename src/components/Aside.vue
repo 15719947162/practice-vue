@@ -44,12 +44,27 @@ export default class Aside extends Vue {
     return this.$store.state.menuCollapse
   }
 
+  get selectArr(){
+    return this.$store.state.selectArr
+  }
+
   handleSelect(key: string, keyPath: string): void {
     this.findNodeInArrData(key);
   }
 
-  findNodeInArrData(key:string){
-    this.$store.dispatch('setSelectNode',this.menuArrData.filter((item:Item) => item.id == key)[0])
+  findNodeInArrData(key:string): void {
+    const selectNode = this.menuArrData.filter((item:Item) => item.id == key)[0];
+    this.pushSelectArr(selectNode)
+    this.$store.dispatch('setSelectNode',selectNode);
+  }
+
+  pushSelectArr(selectNode:object): void {
+    const newArr = JSON.parse(JSON.stringify(this.selectArr));
+    debugger
+    if(!newArr.find((item:Item) => item.id == selectNode.id)){
+      newArr.push(selectNode);
+      this.$store.dispatch('setSelectArr',newArr);
+    }
   }
 }
 </script>
