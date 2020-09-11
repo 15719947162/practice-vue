@@ -1,16 +1,18 @@
 <template>
   <div style="height:100%">
-    <el-tabs v-model="selectNodeId" type="border-card" closable @tab-remove="removeTabs">
+    <el-tabs :value="selectNodeId" type="border-card" closable @tab-remove="removeTabs" @tab-click="clickTabs">
       <el-tab-pane v-for="(item,index) in selectArr" :key="index" :name="item.id" :src="item.src">
         <span slot="label"><i class="el-icon-date"></i> {{item.name}}</span>
       </el-tab-pane>
     </el-tabs>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 
 interface Item {
   id:string,
@@ -18,15 +20,14 @@ interface Item {
   children:Array<Item | null>
 }
 
+interface Nodetype {
+  id:string
+}
+
 @Component
 export default class HelloWorld extends Vue {
   get selectNodeId(){
     return this.$store.state.selectNode.id
-  }
-  set selectNodeId(val){
-    const selectNode = this.menuArrData.filter((item:Item) => item.id == val)[0];
-    this.$router.push({ path: selectNode.src });  
-    this.$store.dispatch('setSelectNode',selectNode);
   }
 
   get menuArrData(){
@@ -35,6 +36,12 @@ export default class HelloWorld extends Vue {
 
   get selectArr(){
     return this.$store.state.selectArr
+  }
+
+  clickTabs(node:any): void {
+    const selectNode = this.menuArrData.filter((item:Item) => item.id == node.name)[0];
+    this.$store.dispatch('setSelectNode',selectNode);
+    this.$router.push(selectNode.src);
   }
 
   removeTabs(name:string): void {

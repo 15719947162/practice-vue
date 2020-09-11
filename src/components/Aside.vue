@@ -24,6 +24,11 @@ interface Item {
   children:Array<Item | null>
 }
 
+interface Nodetype {
+  id:string,
+  src:string,
+}
+
 @Component({
   components: {
     MenuMain
@@ -56,11 +61,11 @@ export default class Aside extends Vue {
     const selectNode = this.menuArrData.filter((item:Item) => item.id == key)[0];
     this.pushSelectArr(selectNode)
     this.$store.dispatch('setSelectNode',selectNode);
+    this.$router.push(selectNode.src)
   }
 
-  pushSelectArr(selectNode:object): void {
+  pushSelectArr(selectNode:Nodetype): void {
     const newArr = JSON.parse(JSON.stringify(this.selectArr));
-    debugger
     if(!newArr.find((item:Item) => item.id == selectNode.id)){
       newArr.push(selectNode);
       this.$store.dispatch('setSelectArr',newArr);

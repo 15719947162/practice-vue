@@ -29,7 +29,14 @@ import Main from "./components/Main.vue";
     Main
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  get selectNode(){
+    return this.$store.state.selectNode
+  }
+  mounted() {
+    this.$router.push(this.selectNode.src);
+  }
+}
 </script>
 
 <style lang="scss">

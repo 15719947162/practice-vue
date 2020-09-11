@@ -7,6 +7,11 @@ export default new Vuex.Store({
   state: {
     menuCollapse: false,
     menuArrData: [{
+      id:"0",
+      name:"首页",
+      src:"/",
+      path:["首页"],
+    },{
       id: "1",
       name: "节点1",
       path: ["节点1"],
@@ -34,6 +39,7 @@ export default new Vuex.Store({
       id: "11",
       name: "节点11",
       path: ["节点1", "节点11"],
+      src:"/table",
       children: []
     }, {
       id: "12",
@@ -58,7 +64,7 @@ export default new Vuex.Store({
       id: "122",
       name: "节点122",
       path: ["节点1", "节点12", "节点122"],
-      src:"/about",
+      src:"/form",
       children: []
     }, {
       id: "2",
@@ -174,12 +180,14 @@ export default new Vuex.Store({
     selectNode: {
       id:"0",
       name:"首页",
-      src:"/"
+      src:"/",
+      path:["首页"],
     },
     selectArr:[{
       id:"0",
       name:"首页",
-      src:"/"
+      src:"/",
+      path:["首页"]
     }],
   },
   mutations: {
