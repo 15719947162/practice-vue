@@ -24,7 +24,6 @@ export default class HelloWorld extends Vue {
     return this.$store.state.selectNode.id
   }
   set selectNodeId(val){
-    debugger
     const selectNode = this.menuArrData.filter((item:Item) => item.id == val)[0];
     this.$router.push({ path: selectNode.src });  
     this.$store.dispatch('setSelectNode',selectNode);
